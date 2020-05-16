@@ -1,7 +1,7 @@
 # Python-Task-IV
  
- This code is basically a banking system which operates on a file system.
+ This code is basically depicts a banking system .
  
- The program allows a staff to login, create a new account or retrieve account details.
+ The code allows a staff to login, create a new account or retrieve account details.
  
- It creates a session file which terminates as the staff logs out.
+ It creates a session file to store user session, which is terminated as the staff logs out.
