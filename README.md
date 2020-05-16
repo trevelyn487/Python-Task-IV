@@ -1,6 +1,6 @@
 # Python-Task-IV
  
- This code is basically depicts a banking system .
+ This code basically depicts a banking system app.
  
  The code allows a staff to login, create a new account or retrieve account details.
  
