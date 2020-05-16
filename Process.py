@@ -1,10 +1,9 @@
 # This code is written to ensure that whatever details entered
 # are of the standard format. This includes the prompts required
-# to take certain actions, valid staff log in details, 
+# to take different actions, valid staff log in details, 
 # integer where digits are required, savings and current
 # where account type is required, valid email etc.
-# If I may be so immodest, I would say appropriate measures
-# were taken to make the code totally bug free.
+
 
 from email_validator import validate_email, EmailNotValidError
 import os
@@ -13,13 +12,15 @@ import re
 import string
 
 
-# Making the email and main_option variables global to enable their use
-# in different functions throughout the code.
+# Making the email and main_option variables global 
+# to enable their use in different functions 
+# throughout the code.
 account_email = " "
 main_option = " "
 
-# Ensuring correct username is used.
-def valid_username(instruction):
+
+# Ensuring correct username is used by Staff One.
+def valid_username1(instruction):
     staff = open("staff.txt", "r")
     while True:
         try:
@@ -28,14 +29,15 @@ def valid_username(instruction):
             if find1.group(0):
                 pass
         except AttributeError:
-            print("This username does not exist. Try again.")
+            print("Incorrect username! Check and Try again.")
         else:
             return staff
             staff.close()
             break
 
-# Ensuring correct password is used.
-def valid_password(instruction):
+
+# Ensuring correct password is used by Staff One.
+def valid_password1(instruction):
     staff = open("staff.txt", "r")
     while True:
         try:
@@ -44,11 +46,66 @@ def valid_password(instruction):
             if find2.group(0):
                 pass
         except AttributeError:
-            print("Wrong password for username entered. Try again.")
+            print("Wrong password for username entered! Check and Try again.")
         else:
             return staff
             staff.close()
             break
+
+
+# Ensuring correct username is used by Staff Two.
+def valid_username2(instruction):
+    staff = open("staff.txt", "r")
+    while True:
+        try:
+            staff = input(instruction)
+            find3 = re.match(r"uranus487", str(staff))
+            if find3.group(0):
+                pass
+        except AttributeError:
+            print("Incorrect username! Check and Try again.")
+        else:
+            return staff
+            staff.close()
+            break
+
+
+# Ensuring correct password is used by Staff Two.
+def valid_password2(instruction):
+    staff = open("staff.txt", "r")
+    while True:
+        try:
+            staff = input(instruction)
+            find4 = re.match(r"asteroid", str(staff))
+            if find4.group(0):
+                pass
+        except AttributeError:
+            print("Wrong password for username entered! Check and Try again.")
+        else:
+            return staff
+            staff.close()
+            break
+
+
+# Ensuring only staff with details in staff.txt can log in.
+# Also, it ensures that one staff does not access the app
+# using the other staff's log in details.
+def staff_identification_and_login():
+    
+    while True:
+        name = input("\nEnter your first name, please: ").lower()
+        if name == "john":
+            print("\nEnter log in details below to proceed.")
+            username = valid_username1("Enter username: ")
+            password = valid_password1("Enter password: ")
+            break
+        elif name == "jane":
+            print("\nEnter log in details below to proceed.")
+            username = valid_username2("Enter username: ")
+            password = valid_password2("Enter password: ")
+            break
+        else:
+            print("Unknown name. Check and try again.")
 
 
 # Function to create staff details in staff.txt file
@@ -170,7 +227,7 @@ Enter the Account Number for which details are sought to proceed: ''')
 
         if str(check_details) in database:
             customer_details = open("customer.txt", "r")
-            print("\nHere are the customer's details: \n" + customer_details.read())
+            print("\nHere are the customer's details: \n" + database)
             break
         
         else:
@@ -245,8 +302,8 @@ def main_option_validation():
             break
             
             if main_option == "a":
-                username = input("Enter username: ").lower()
-                password = input("Enter password: ").lower()
+                username = valid_username1("Enter username: ")
+                password = valid_password1("Enter password: ")
             
             elif main_option == "b":
                 print("Have a lovely day. \nApp CLOSED.")
@@ -268,11 +325,7 @@ To Close App, select "B": ''').lower()
 
     if main_option == "a":
         
-        print("\nEnter log in details below to continue.")
-        
-        # Calling the username and password validation functions.
-        username = valid_username("Enter username: ")
-        password = valid_password("Enter password: ")
+        staff_identification_and_login()
 
         # Creating a file to store user session.
         user_session = open("session.txt", "w+")
