@@ -281,7 +281,7 @@ To Close App, select "B": ''').lower()
         option = True
         while True:
             
-            # Calling the functions which allows staff
+            # Calling the function which allows staff
             # take different actions.
             actions()
             break
