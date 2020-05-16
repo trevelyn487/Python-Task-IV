@@ -51,7 +51,6 @@ def valid_password(instruction):
             break
 
 
-
 # Function to create staff details in staff.txt file
 def create_staff_details():
     with open("staff.txt", "w") as staff:
@@ -133,7 +132,7 @@ Enter Account Name: ''')
     
     opening_balance = digit_validation('''Enter Opening Balance(Naira): ''')
     
-    # calling the account_type_validation function which
+    # Calling the account_type_validation function which
     # collects account type and also validates before accepting.
     account_type = account_type_validation()
     
@@ -141,6 +140,7 @@ Enter Account Name: ''')
     # and also validates before accepting.         
     enter_email = email_validation()
     
+    # Generating 10 digit account number.
     num = "".join((random.choice(string.digits) for i in range (10)))
     account_number = num
     
@@ -156,7 +156,6 @@ Enter Account Name: ''')
                
     print("\nAccount has been created. \nAccount Number is " + account_number + ".")
     
-
 
 # Enables Staff check customer's account details.    
 def check_account_details():
@@ -282,6 +281,8 @@ To Close App, select "B": ''').lower()
         option = True
         while True:
             
+            # Calling the functions which allows staff
+            # take different actions.
             actions()
             break
 
